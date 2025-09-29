@@ -54,19 +54,20 @@ class PollReader():
         and each value in a CSV is seperated by a comma.
         """
 
+
         # iterate through each row of the data
-        for i in self.raw_data:
+        for row in self.raw_data[1:]:  # Skip the header row
 
             # split up the row by column
-            seperated = i.split(' ')
+            seperated = row.strip().split(',')
 
             # map each part of the row to the correct column
             self.data_dict['month'].append(seperated[0])
             self.data_dict['date'].append(int(seperated[1]))
             self.data_dict['sample'].append(int(seperated[2]))
-            self.data_dict['sample type'].append(seperated[2])
-            self.data_dict['Harris result'].append(float(seperated[3]))
-            self.data_dict['Trump result'].append(float(seperated[4]))
+            self.data_dict['sample type'].append(seperated[3])
+            self.data_dict['Harris result'].append(float(seperated[4]))
+            self.data_dict['Trump result'].append(float(seperated[5]))
 
 
     def highest_polling_candidate(self):
