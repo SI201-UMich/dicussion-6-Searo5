@@ -64,10 +64,10 @@ class PollReader():
             # map each part of the row to the correct column
             self.data_dict['month'].append(seperated[0])
             self.data_dict['date'].append(int(seperated[1]))
-            self.data_dict['sample'].append(int(seperated[2]))
-            self.data_dict['sample type'].append(seperated[3])
-            self.data_dict['Harris result'].append(float(seperated[4]))
-            self.data_dict['Trump result'].append(float(seperated[5]))
+            self.data_dict['sample'].append(int(seperated[2].split(" ")[0]))
+            self.data_dict['sample type'].append(seperated[2].split(" ")[1])
+            self.data_dict['Harris result'].append(float(seperated[3]))
+            self.data_dict['Trump result'].append(float(seperated[4]))
 
 
     def highest_polling_candidate(self):
@@ -81,6 +81,12 @@ class PollReader():
             str: A string indicating the candidate with the highest polling percentage or EVEN,
              and the highest polling percentage.
         """
+        highest_harris = max(self.data_dict['Harris result'])
+        highest_trump = max(self.data_dict['Trump result'])
+        if highest_harris > highest_trump:
+            return f"Harris with {highest_harris}%"
+        elif highest_trump > highest_harris:
+            return f"Trump with {highest_trump}%"
         pass
 
 
